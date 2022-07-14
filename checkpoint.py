@@ -1,94 +1,37 @@
 # Importante: No modificar ni el nombre ni los argumetos que reciben las funciones, sólo deben escribir
 # código dentro de las funciones ya definidas.
 
-def NumeroCapicua(numero):
+from re import I
+def ListaDivisibles(numero, tope):
     '''
-    En matemáticas, la palabra capicúa (del catalán cap i cua, 'cabeza y cola')​ 
-    se refiere a cualquier número que se lee igual de izquierda a derecha que 
-    de derecha a izquierda. Se denominan también números palíndromos.
-    Esta función devuelve el valor booleano True si el número es capicúa, de lo contrario
-    devuelve el valor booleano False 
-    En caso de que el parámetro no sea de tipo entero, debe retornar nulo.
-    Recibe un argumento:
-        numero: Será el número sobre el que se evaluará si es capicúa o no lo es.
+    Esta función devuelve una lista ordenada de menor a mayor con los números divisibles 
+    por el parámetro número entre uno (1) y el valor del parámetro "tope"
+    Recibe dos argumentos:
+        numero: Numero entero divisor
+        tope: Máximo valor a evaluar a partir de uno (1)
     Ej:
-        NumeroCapicua(787) debe retornar True
-        NumeroCapicua(108) debe retornar False
+        ListaDivisibles(6,30) debe retornar [6,12,18,24,30]
+        ListaDivisibles(10,5) debe retornar []
+        ListaDivisibles(7,50) debe retornar [7,14,21,28,35,42,49]
     '''
-    #Tu código aca:
-    try:
-        if numero==int(numero):
-            if str(numero)==str(numero)[::-1]:
-                return True
-            else:
-                return False  
-        else:
-            return None   
-    except:
-        return None      
-def Factorial(numero):
-    '''
-    Esta función devuelve el factorial del número pasado como parámetro.
-    En caso de que no sea de tipo entero y/o sea menor que 1, debe retornar nulo.
-    Recibe un argumento:
-        numero: Será el número con el que se calcule el factorial
-    Ej:
-        Factorial(4) debe retornar 24
-        Factorial(-2) debe retornar nulo
-    '''
-    #Tu código aca:
-    A=1
-    if numero < 0:
-        return None
-    else:
-        for i in range(numero):
-            A=A*(numero-i)
-    return A
-def ProximoPrimo(actual_primo):
-    '''
-    Esta función devuelve el número primo siguiente al enviado como parámetro.
-    En caso de que el parámetro no sea de tipo entero y/o no sea un número primo, debe retornar nulo.
-    Recibe un argumento:
-        actual_primo: Será el número primo a partir del cual debo buscar el siguiente
-    Ej:
-        ProximoPrimo(7) debe retornar 11
-        ProximoPrimo(8) debe retornar nulo
-    '''
-    #Tu código aca:
-    cont=1
-    for i in range(1,actual_primo):
-        if actual_primo%i==0:
-            cont+=1
-    if cont==2:
-        Psigue=1
-        while Psigue!=2:
-            actual_primo+=1
-            Psigue1=1
-            for j in range(1,actual_primo):
-                if actual_primo%j==0:
-                    Psigue1+=1       
-            Psigue=Psigue1
-        return actual_primo
-    else:
-        return None
-def FactorizarNumero(numero):
-    '''
-    Esta función recibe como parámetro un número entero mayor a cero y devuelva dos listas, 
-    una con cada factor común y otra con su exponente, 
-    esas dos listas tienen que estar contenidas en otra lista.
-    En caso de que el parámetro no sea de tipo entero y/ó mayor a cero debe retornar nulo.
-    Recibe un argumento:
-        numero: Será el número sobre el que se hará la factorización.
-    Ej:
+    #Tu código aca:}
+    lista=[]
+    for i in range(i,tope+1):
+        if i>=numero and i%numero==0:
+            lista.append(i)
+    return lista
 
-        factorizar_numero(12) debe retornar [[2,3],[2,1]]
-        factorizar_numero(13) debe retornar [[13],[1]]
-        factorizar_numero(14) debe retornar [[2,7],[1,1]]
+def Exponente(numero, exponente):
+    '''
+    Esta función devuelve el resultado de elevar el parámetro "numero" al parámetro "exponente"
+    Recibe dos argumentos:
+        numero: El número base en la operación exponencial
+        exponente: El número exponente en la operación exponencial
+    Ej:
+        Exponente(10,3) debe retornar 1000
     '''
     #Tu código aca:
-    
-    return 'Funcion incompleta'
-
+    return numero**exponente
 def ListaDeListas(lista):
     '''
     Esta función recibe una lista, que puede contener elementos que a su vez sean listas y
@@ -103,7 +46,90 @@ def ListaDeListas(lista):
         ListaDeListas([[1,2,[3]],[4]]) debe retornar [1,2,3,4]
     '''
     #Tu código aca:
-    return 'Funcion incompleta'
+    
+    try:
+      return sum(([x] if not isinstance(x, list) else ListaDeListas(x)for x in lista), [])
+    except:
+      return None
+def Factorial(numero):
+    '''
+    Esta función devuelve el factorial del número pasado como parámetro.
+    En caso de que no sea de tipo entero y/o sea menor que 0, debe retornar nulo.
+    Recibe un argumento:
+        numero: Será el número con el que se calcule el factorial
+    Ej:
+        Factorial(4) debe retornar 24
+        Factorial(-2) debe retornar nulo
+        Factorial(0) debe retornar 1
+    '''
+    #Tu código aca:
+    A=1
+    if numero < 0:
+        return None
+    else:
+        for i in range(numero):
+            A=A*(numero-i)
+    return A
+def ListaPrimos(desde, hasta):
+    '''
+    Esta función devuelve una lista con los números primos entre los valores "desde" y "hasta"
+    pasados como parámetro, siendo ambos inclusivos.
+    En caso de que alguno de los parámetros no sea de tipo entero y/o no sea mayor a cero, debe retornar nulo.
+    En caso de que el segundo parámetro sea mayor al primero, pero ambos mayores que cero,
+    debe retornar una lista vacía.
+    Recibe un argumento:
+        desde: Será el número a partir del cual se toma el rango
+        hasta: Será el número hasta el cual se tome el rango
+    Ej:
+        ListaPrimos(7,15) debe retornar [7,11,13]
+        ListaPrimos(100,99) debe retornar []
+        ListaPrimos(1,7) debe retonan [1,2,3,5,7]
+    '''
+    #Tu código aca:
+    #crea una funcion para hallar los numeros primos desde 7 hasta 15.
+    lista=[]
+    try:
+        for i in range(desde, hasta+1):
+            if i>=1:
+                for j in range(2,i):
+                    if i%j==0:
+                        break
+                else:
+                    lista.append(i)
+        return lista
+    except:
+        return None
+def ListaRepetidos(lista):
+    '''
+    Esta función recibe como parámetro una lista y devuelve una lista de tuplas donde cada 
+    tupla contiene un valor de la lista original y las veces que se repite. Los valores 
+    de la lista original no deben estar repetidos. 
+    Debe respetarse el orden original en el que aparecen los elementos.
+    En caso de que el parámetro no sea de tipo lista debe retornar nulo.
+    Recibe un argumento:
+        lista: Será la lista que se va a evaluar.
+    Ej:
+        ListaRepetidos([]) debe retornar []
+        ListaRepetidos(['hola', 'mundo', 'hola', 13, 14]) 
+            debe retornar [('hola',2),('mundo',1),(13,1),(14,1)]
+        ListaRepetidos([1,2,2,4]) debe retornar [(1,1),(2,1),(4,1)]
+    '''
+    #Tu código aca:
+    #hola
+    resultantList = []
+    cantidades=[]
+    final=[]
+    if type(lista)==tuple:
+        return None
+    else:
+        for element in lista:
+            if element not in resultantList:
+                resultantList.append(element)
+        for i in range(len(resultantList)):
+            Var=lista.count(resultantList[i])
+            cantidades.append(Var)
+            final.append((resultantList[i],cantidades[i]))
+        return final
 
 def ClaseVehiculo(tipo, color):
     '''
@@ -127,8 +153,20 @@ def ClaseVehiculo(tipo, color):
         a.Acelerar(-10) -> debe devolver 15
     '''
     #Tu código aca:
-    return 'Funcion incompleta'
-
+    class Vehiculo:
+        def __init__(self, tipo, color):
+            self.Tipo=tipo
+            self.Color=color
+            self.Velocidad=0
+        def Acelerar(self, velocidad):
+            if self.Velocidad+velocidad<0:
+                self.Velocidad=0
+            elif self.Velocidad+velocidad>100:
+                self.Velocidad=100
+            else:
+                self.Velocidad=self.Velocidad+velocidad
+            return self.Velocidad
+    return Vehiculo(tipo, color)
 def OrdenarDiccionario(diccionario_par, clave, descendente=True):
     '''
     Esta función recibe como parámetro un diccionario, cuyas listas de valores tienen el mismo
@@ -156,4 +194,19 @@ def OrdenarDiccionario(diccionario_par, clave, descendente=True):
                                                                 'clave3':[3,2,1]}
     '''
     #Tu código aca:
-    return 'Funcion incompleta'  
+    if type(diccionario_par)==dict:
+        if clave in diccionario_par:
+            lista=[]
+            for i in diccionario_par[clave]:
+                lista.append(i)
+            if descendente:
+                lista.sort()
+            else:
+                lista.sort(reverse=True)
+            for i in range(len(lista)):
+                diccionario_par[clave][i]=lista[i]
+            return diccionario_par
+        else:
+            return None
+    else:
+        return None
